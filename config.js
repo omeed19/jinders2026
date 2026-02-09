@@ -1,5 +1,5 @@
 const CONFIG = {
-    valentineName: "Jade",
+    valentineName: "Cindy",
 
     pageTitle: "Will You Be My Valentine? 💝",
 
