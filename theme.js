@@ -1,21 +1,9 @@
-// Update CSS variables from configuration
-function applyTheme() {
-    const config = window.VALENTINE_CONFIG;
-    const root = document.documentElement;
+document.documentElement.style.setProperty("--bg", CONFIG.colors.background);
+document.documentElement.style.setProperty("--card", CONFIG.colors.card);
+document.documentElement.style.setProperty("--primary", CONFIG.colors.primary);
+document.documentElement.style.setProperty("--secondary", CONFIG.colors.secondary);
+document.documentElement.style.setProperty("--text", CONFIG.colors.text);
 
-    // Apply colors
-    root.style.setProperty('--background-color-1', config.colors.backgroundStart);
-    root.style.setProperty('--background-color-2', config.colors.backgroundEnd);
-    root.style.setProperty('--button-color', config.colors.buttonBackground);
-    root.style.setProperty('--button-hover', config.colors.buttonHover);
-    root.style.setProperty('--text-color', config.colors.textColor);
-
-    // Apply animation settings
-    root.style.setProperty('--float-duration', config.animations.floatDuration);
-    root.style.setProperty('--float-distance', config.animations.floatDistance);
-    root.style.setProperty('--bounce-speed', config.animations.bounceSpeed);
-    root.style.setProperty('--heart-explosion-size', config.animations.heartExplosionSize);
+if (CONFIG.backgroundImage) {
+  document.body.style.backgroundImage = `url(${CONFIG.backgroundImage})`;
 }
-
-// Apply theme when the page loads
-window.addEventListener('DOMContentLoaded', applyTheme); 
