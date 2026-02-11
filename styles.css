@@ -1,0 +1,373 @@
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #ffe3f0 0%,
+    #ffd1e3 50%,
+    #ffc4d9 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: background 0.8s ease, filter 0.5s ease;
+}
+
+body.clear-bg {
+  background: linear-gradient(
+    180deg,
+    #ffd1e3 0%,
+    #ffb3cd 50%,
+    #ff9fc3 100%
+  );
+}
+
+body.dim {
+  filter: brightness(0.9);
+}
+
+
+.screen {
+  text-align: center;
+}
+
+.card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
+  text-align: center;
+  z-index: 5;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+button {
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  background: #ff6fb1;
+  color: white;
+  cursor: pointer;
+}
+
+/* Button micro-interactions */
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* YES button pulse */
+@keyframes yesPulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+#yesBtn {
+  animation: yesPulse 1.8s ease-in-out infinite;
+}
+
+/* NO button jiggle */
+@keyframes noJiggle {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-4px); }
+  50%  { transform: translateX(4px); }
+  75%  { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
+
+#noBtn.jiggle {
+  animation: noJiggle 0.35s ease;
+}
+
+
+#noBtn {
+  background: #ff9ccf;
+}
+
+/* Puzzle */
+.puzzle-board {
+  width: 300px;
+  height: 300px; /* LOCK BOARD SIZE */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); /* LOCK ROW HEIGHTS */
+  gap: 8px;
+  margin: 1rem auto;
+}
+
+.puzzle-slot {
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.35);
+  border-radius: 14px;
+  position: relative;
+  overflow: hidden;
+
+  /* visual guidance */
+  border: 2px dashed rgba(255, 105, 180, 0.45);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.4),
+    inset 0 0 12px rgba(255, 182, 213, 0.6);
+}
+
+.puzzle-slot.hover {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(255, 105, 180, 0.9);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 255, 255, 0.8),
+    0 0 16px rgba(255, 105, 180, 0.4);
+}
+
+
+
+.puzzle-pieces {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.puzzle-piece {
+  width: 94px;
+  height: 94px;
+  background-size: 300px 300px;
+  border-radius: 12px;
+  cursor: grab;
+}
+
+/* Completed image */
+#completionContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+#completionContainer.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+#completionContainer.fade-out {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(10px);
+}
+
+#completedImage {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto 18px;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+
+#continueBtn {
+  margin-top: 10px;
+}
+
+
+body.clear-bg {
+  background: #fff7fb; /* soft, very light pink */
+}
+
+.heart {
+  position: fixed;
+  font-size: 1.6rem;
+  pointer-events: none;
+  z-index: 999; /* force above all UI */
+  animation: heartBurst 1.2s ease forwards;
+}
+
+
+@keyframes heartBurst {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.6);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(1.2);
+  }
+}
+
+@keyframes imagePop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+#bobbyContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.bobby {
+  position: fixed;
+  pointer-events: none;
+}
+
+#yesCelebrationText {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff5fa2;
+  text-shadow: 0 10px 30px rgba(255, 95, 162, 0.4);
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#yesCelebrationText.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.bobby {
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Correct placement glow */
+@keyframes correctGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 105, 180, 0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(255, 105, 180, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(255, 105, 180, 0);
+  }
+}
+
+.correct {
+  animation: correctGlow 0.5s ease;
+}
+
+/* Wrong placement shake */
+@keyframes wrongShake {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(-6px); }
+  50%  { transform: translateX(6px); }
+  75%  { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
+}
+
+.wrong {
+  animation: wrongShake 0.35s ease;
+}
+
+/* Tiny heart pop */
+.tiny-heart {
+  position: fixed;
+  font-size: 1.2rem;
+  pointer-events: none;
+  animation: tinyHeartPop 0.8s ease forwards;
+  z-index: 50;
+}
+
+@keyframes tinyHeartPop {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.2) translateY(-30px);
+  }
+}
+
+
+
+#replayBtn {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 30; /* ABOVE bobbies */
+}
+
+
+#replayBtn.show {
+  opacity: 1;
+}
+
+
+
+
+
+/* Screen transitions */
+.screen,
+.card {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.screen.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+.card {
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+}
+
+.card.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Dim background during transitions */
+body.dim {
+  filter: brightness(0.9);
+  transition: filter 0.5s ease;
+}
+

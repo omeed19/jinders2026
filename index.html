@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Valentine 💖</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="bobbyContainer"></div>
+
+  <!-- PUZZLE SCREEN -->
+  <div id="puzzleScreen" class="screen">
+    <h1>Put the picture together 💗</h1>
+
+    <div id="puzzleBoard" class="puzzle-board"></div>
+    <div id="puzzlePieces" class="puzzle-pieces"></div>
+
+    <p id="cheerText" style="display:none;">THE BOBBY'S ARE CHEERING YOU ON!</p>
+  </div>
+
+  <!-- COMPLETION CONTAINER (IMAGE + CONTINUE BUTTON) -->
+  <div id="completionContainer">
+    <img id="completedImage" alt="Completed puzzle" />
+    <button id="continueBtn">Continue 💖</button>
+  </div>
+
+  <!-- VALENTINE SCREEN -->
+  <div id="valentineScreen" class="card" style="display:none;">
+    <h1 id="question"></h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 🙃</button>
+    </div>
+
+    <div id="result"></div>
+  </div>
+
+  <!-- AUDIO -->
+  <audio id="puzzleChime" src="sounds/chime.mp3" preload="auto"></audio>
+  <audio id="yaySound" src="sounds/yay.mp3" preload="auto"></audio>
+  <audio id="placeSound" src="sounds/place.mp3" preload="auto"></audio>
+
+  <!-- YES CELEBRATION TEXT -->
+  <div id="yesCelebrationText">SHE SAID YES!!! 💖🎉</div>
+
+  <!-- REPLAY -->
+  <button id="replayBtn" style="display:none;">One more time? 💕</button>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
